@@ -1,14 +1,14 @@
 [//]: # (Image References)
 
-[image1]: https://user-images.githubusercontent.com/10624937/42135619-d90f2f28-7d12-11e8-8823-82b970a54d7e.gif "Trained Agent"
-
 # Udacity Deep Reinforcement Learning Nano Degree: Project 1 - Navigation
 
 ## Introduction
 
 I trained an agent to navigate in a large, square world with bananas.
 
-![Trained Agent][image1]
+<img src="images/my-trained-agent.gif" width="60%" align="top-left" alt="" title="My trained Agent" />
+
+*Above: My trained agent!*
 
 The task is episodic. The agent gets a reward of +1 for collecting a yellow banana and a reward of -1 for collecting a blue banana. During one episode the agent is to collect as many yellow bananas as possible while avoiding blue bananas. Every episode is 300 steps.
 
