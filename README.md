@@ -73,4 +73,4 @@ jupyter notebook
 
 2. Before running code in a notebook, change the kernel to match the `drl-navigation` environment by using the drop-down `Kernel` menu.
 
-3. Follow the instructions in `Report.ipynb`
+3. Follow the instructions in `Navigation.ipynb`
