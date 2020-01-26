@@ -1,0 +1,9 @@
+matplotlib
+numpy>=1.11.0
+jupyter
+torch==0.4.0
+ipykernel
+bleach==1.5.0
+protobuf
+mlagents==0.4
+unityagents==0.4.0
