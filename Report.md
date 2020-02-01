@@ -8,7 +8,7 @@ Reinforcement learning is the only paradigm that does not require a data set in 
 At first, the agent observes the environment state and chooses an action. At the next time step, as a consequence of the agents action, the environment transitions and gives some reward to the agent. Then the agent can choose an action again etc. The goal of the agent is to maximize expected cumulative reward.
 
 <figure class="image">
-  <img src="images/1_state_action_reward.png" width="60%" align="top-left" alt="" title="state action reward" />
+  <img src="images/1_state_action_reward.png" width="60%" alt="" title="state action reward" />
   <figcaption>source: Udacity</figcaption>
 </figure>
 
@@ -21,19 +21,19 @@ A reinforcement learning task is a Markov Decision Process (MDP). If consists of
  * **one-step dynamics**, defined by transition probabilities
  * **reward probabilities**
 
-The agent determines the action according to a **policy** $\pi$. A deterministic policy is a mapping from the set of environment states to the set of possible actions. A stochastic policy takes an environment state and an action and returns the probability that the agent chooses that action.
+The agent determines the action according to a **policy** <img src="https://render.githubusercontent.com/render/math?math=\pi">. A deterministic policy is a mapping from the set of environment states to the set of possible actions. A stochastic policy takes an environment state and an action and returns the probability that the agent chooses that action.
 
-Since rewards which come sooner are more predictable, they are usually valued more highly. To do this, future reward is multiplied by a discount rate $\gamma$ with 0 $\leq \gamma \leq$ 1. For a time step $t$ the return is $G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + ...$. This concept is called **discounted return**.
+Since rewards which come sooner are more predictable, they are usually valued more highly. To do this, future reward is multiplied by a discount rate <img src="https://render.githubusercontent.com/render/math?math=\gamma" /> with <img src="https://render.githubusercontent.com/render/math?math=0 \leq \gamma \leq 1" />. For a time step <img src="https://render.githubusercontent.com/render/math?math=t" /> the return is <img src="https://render.githubusercontent.com/render/math?math=G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + ..." />. This concept is called **discounted return**.
 
-Each state can have a value which corresponds to the expected return when starting in that state and choosing actions according to the policy $\pi$.
+Each state can have a value which corresponds to the expected return when starting in that state and choosing actions according to the policy <img src="https://render.githubusercontent.com/render/math?math=\pi" />.
 The value of any state is expressed by the **Bellman Expectation Equation**:<br/>
-$v_\pi​(s) = I\!E_\pi​[R_{t+1} + \gamma v_\pi​(S_{t+1}​) ∣ S_t ​= s]$ *(state-value function for policy $\pi$)*
+<img src="https://render.githubusercontent.com/render/math?math=v_\pi(s) = I\!E_\pi[R_{t+1} + \gamma v_\pi(S_{t+1}) | S_t = s]" /> *(state-value function for policy <img src="https://render.githubusercontent.com/render/math?math=\pi" />)*
 
 
-Each state-action pair can have a value which corresponds to the expected return starting in that state, taking that action and thereafter choosing actions according to the policy $\pi$:<br/>
-$q_\pi(s, a) = I\!E_\pi[G_t | S_t = s, A_t = a]$ ( **Action-Value Function**)
+Each state-action pair can have a value which corresponds to the expected return starting in that state, taking that action and thereafter choosing actions according to the policy <img src="https://render.githubusercontent.com/render/math?math=\pi" />:<br/>
+<img src="https://render.githubusercontent.com/render/math?math=q_\pi(s, a) = I\!E_\pi[G_t | S_t = s, A_t = a]" /> ( **Action-Value Function**)
 
-**Summary:** Based on the agent's interaction with the environment, it estimates the optimal action-value function. From this function it can derive the optimal policy by choosing $arg max_{a∈A(s)} ​q​_*(s, a)$.
+**Summary:** Based on the agent's interaction with the environment, it estimates the optimal action-value function. From this function it can derive the optimal policy by choosing <img src="https://render.githubusercontent.com/render/math?math=arg max_{a \in A(s)}q_*(s, a)" />.
 
 ## Model-based Learning vs. Model-free Learning
 Model-based learning methods such as Dynamic Programming require a known transition and reward model.
@@ -49,19 +49,19 @@ Many episodes are generated in which the agent chooses random actions (equiproba
 ### Control Problem
 > Estimate the optimal policy.
 
-The optimal policy can be estimated by calculating the difference between the most recent return and the corresponding state-action pair. The resulting value serves as an error term and is multiplied by a constant-$\alpha$ with 0 $\leq \alpha \leq$ 1.
+The optimal policy can be estimated by calculating the difference between the most recent return and the corresponding state-action pair. The resulting value serves as an error term and is multiplied by a constant-<img src="https://render.githubusercontent.com/render/math?math=\alpha" /> with <img src="https://render.githubusercontent.com/render/math?math=0 \leq \alpha \leq 1" />.
 
-Instead of always using the equiprobable random policy, an $\epsilon$-greedy policy derived from the most recent state-action pairs can be used.
+Instead of always using the equiprobable random policy, an <img src="https://render.githubusercontent.com/render/math?math=\epsilon" />-greedy policy derived from the most recent state-action pairs can be used.
 
 <figure class="image">
-  <img src="images/2_mc_control.png" width="60%" align="top-left" alt="" title="MC Control" />
+  <img src="images/2_mc_control.png" width="60%" alt="" title="MC Control" />
   <figcaption>source: Udacity</figcaption>
 </figure>
 
-To overcome the exploration vs. exploitation dilemma, the value of $\epsilon$ can gradually decay over time (Greedy in the Limit with Infinite Exploration / GLIE).
+To overcome the exploration vs. exploitation dilemma, the value of <img src="https://render.githubusercontent.com/render/math?math=\epsilon" /> can gradually decay over time (Greedy in the Limit with Infinite Exploration / GLIE).
 
 ## Temporal Difference Methods
-In contrast to MC Control, TD Control updates the value function after every time step and is therefore also applicable for continuing tasks. TD Control calculates the difference between this target and the currently predicted Q value. This difference is referred to as the TD error. The goal is to reduce this error and find the true value function $q_\pi(s, a)$.
+In contrast to MC Control, TD Control updates the value function after every time step and is therefore also applicable for continuing tasks. TD Control calculates the difference between this target and the currently predicted Q value. This difference is referred to as the TD error. The goal is to reduce this error and find the true value function <img src="https://render.githubusercontent.com/render/math?math=q_\pi(s, a)" />.
 
 There are multiple algorithms:
 ### Sarsa(0) / Sarsa
@@ -91,7 +91,7 @@ The Deep Q-Learning algorithm uses two separate networks with identical architec
 ## Learning Algorithm
 The learning algorithm is based on the [DQN Paper](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf). I used experience replay to randomize the experience tuples. In addition, I update the target Q network only after a whole batch has been processed. I use a batch size of 64.
 
-The agents chooses actions according to an $\epsilon$-greedy policy. To address the exploration vs. exploitation dilemma, $\epsilon$ is set to 1 at the beginning and then decays slowly by a factor of 0.9 to a value of 0.01. I consciously set the decay factor to a larger value than in the DQN exercise because it results in the agent achieving better scores in less episodes.
+The agents chooses actions according to an <img src="https://render.githubusercontent.com/render/math?math=\epsilon" />-greedy policy. To address the exploration vs. exploitation dilemma, <img src="https://render.githubusercontent.com/render/math?math=\epsilon" /> is set to 1 at the beginning and then decays slowly by a factor of 0.9 to a value of 0.01. I consciously set the decay factor to a larger value than in the DQN exercise because it results in the agent achieving better scores in less episodes.
 
 I use a learning rate of 0.0005. I tried higher learning rates without success.
 
@@ -115,12 +115,12 @@ def forward(self, x):
     return x
 ```
 
-<img src="images/3_model.png" width="60%" align="top-left" alt="" title="MC Control" />
+<img src="images/3_model.png" width="60%" alt="" title="MC Control" />
 
 ## Result
 The agent achieves an average score of 13 in less than 300 episodes.
 
-<img src="images/4_result.png" width="60%" align="top-left" alt="" title="MC Control" />
+<img src="images/4_result.png" width="80%" alt="" title="MC Control" />
 
 ## Ideas for Improvement
 ### Double DQN
