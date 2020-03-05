@@ -35,18 +35,24 @@ Each state-action pair can have a value which corresponds to the expected return
 
 **Summary:** Based on the agent's interaction with the environment, it estimates the optimal action-value function. From this function it can derive the optimal policy by choosing <img src="https://render.githubusercontent.com/render/math?math=arg max_{a \in A(s)}q_*(s, a)" />.
 
-## Model-based Learning vs. Model-free Learning
+## A Taxonomy of RL Algorithms
+<figure class="image">
+  <img src="images/rl_overview.png" width="80%" alt="" title="Taxonomy" />
+  <figcaption>A non-exhaustive taxonomy of RL algorithms. Source: https://spinningup.openai.com/en/latest/spinningup/rl_intro2.html</figcaption>
+</figure>
+
+### Model-based Learning vs. Model-free Learning
 Model-based learning methods such as Dynamic Programming require a known transition and reward model.
 
 In contrast, model-free learning methods perform exploratory actions and use the experience gained to directly estimate value functions. Examples are Monte Carlo Methods and Temporal Difference Methods.
 
-## Monte Carlo Methods
-### Prediction Problem
+### Monte Carlo Methods
+#### Prediction Problem
 > Given a policy, how might the agent estimate the value function for that policy?
 
 Many episodes are generated in which the agent chooses random actions (equiprobable random policy). At the end of each episode the state-action pairs are saved.
 
-### Control Problem
+#### Control Problem
 > Estimate the optimal policy.
 
 The optimal policy can be estimated by calculating the difference between the most recent return and the corresponding state-action pair. The resulting value serves as an error term and is multiplied by a constant-<img src="https://render.githubusercontent.com/render/math?math=\alpha" /> with <img src="https://render.githubusercontent.com/render/math?math=0 \leq \alpha \leq 1" />.
@@ -60,30 +66,30 @@ Instead of always using the equiprobable random policy, an <img src="https://ren
 
 To overcome the exploration vs. exploitation dilemma, the value of <img src="https://render.githubusercontent.com/render/math?math=\epsilon" /> can gradually decay over time (Greedy in the Limit with Infinite Exploration / GLIE).
 
-## Temporal Difference Methods
+### Temporal Difference Methods
 In contrast to MC Control, TD Control updates the value function after every time step and is therefore also applicable for continuing tasks. TD Control calculates the difference between this target and the currently predicted Q value. This difference is referred to as the TD error. The goal is to reduce this error and find the true value function <img src="https://render.githubusercontent.com/render/math?math=q_\pi(s, a)" />.
 
 There are multiple algorithms:
-### Sarsa(0) / Sarsa
+#### Sarsa(0) / Sarsa
 Sarsa is an on-policy TD control method. After every action the agent updates the corresponding action-value pair based on the sum of the immediate reward and the discounted value of the next state-action pair.
 
-### Sarsamax / Q-Learning
+#### Sarsamax / Q-Learning
 Sarsamax is an off-policy TD control method. The update step is one step earlier as in the Sarsa(0) algorithm - after receiving the reward and the next state. In Sarsa, the action-value pair which corresponds to the executed action is updated. In Sarsamax, the action-value pair which corresponds to the action of the greedy policy is updated.
 
-### Expected Sarsa
+#### Expected Sarsa
 Expected Sarsa is an on-policy TD control method. It differs from Sarsamax in the update step of the action values. It takes into account the probability that the agent chooses each possible action from the next state.
 
-## Deep Q-Learning
+### Deep Q-Learning
 A variant of Q-Learning is Deep Q-Learning. The idea of Deep Q-Learning is to use a deep neural network to approximate the optimal action-value function. This network outputs a vector of action values based directly on observations from the environment. The agent can choose the action with the maximum value, for example.
 
 In contrast to MC Control or TD Control where only one Q value is calculated at a time, with Deep Q-Learning a Q value for every possible action can be produced in one forward pass.
 
-### Replay Buffer and Experience Replay
+#### Replay Buffer and Experience Replay
 A sequence of experience tuples is often highly correlated which can lead to oscillating or diverging action values. To break correlations all experiences can be stored in a replay buffer.
 
 The idea of experience replay is to sample a small batch of random tuples to learn. Experience replay also allows to recall experiences involving rare states or costly actions instead of wasting them.
 
-### Fixed Q-Targets
+#### Fixed Q-Targets
 The Deep Q-Learning algorithm uses two separate networks with identical architectures. The primary network is updated in every step whereas the target network is updated only periodically, i.e. after a certain number of steps. This approach prevents from a a constantly moving target.
 
 # Project 1 - Navigation
