@@ -37,8 +37,18 @@ Each state-action pair can have a value which corresponds to the expected return
 
 ## A Taxonomy of RL Algorithms
 <figure class="image">
+  <img src="images/rl_overview_v2.png" width="60%" alt="" title="Taxonomy" />
+  <figcaption>A non-exhaustive taxonomy of RL algorithms. Source: "Introduction to Reinforcement Learning" by J. Zico Kolter, Carnegie Mellon University</figcaption>
+</figure>
+
+<figure class="image">
   <img src="images/rl_overview.png" width="80%" alt="" title="Taxonomy" />
   <figcaption>A non-exhaustive taxonomy of RL algorithms. Source: https://spinningup.openai.com/en/latest/spinningup/rl_intro2.html</figcaption>
+</figure>
+
+<figure class="image">
+  <img src="images/Comparison_of_RL_Algorithms.png" width="80%" alt="" title="Comparison" />
+  <figcaption>Comparison of RL algorithms. Source:https://towardsdatascience.com/introduction-to-various-reinforcement-learning-algorithms-part-ii-trpo-ppo-87f2c5919bb9</figcaption>
 </figure>
 
 ### Model-based Learning vs. Model-free Learning
@@ -79,6 +89,7 @@ Sarsamax is an off-policy TD control method. The update step is one step earlier
 #### Expected Sarsa
 Expected Sarsa is an on-policy TD control method. It differs from Sarsamax in the update step of the action values. It takes into account the probability that the agent chooses each possible action from the next state.
 
+## Value-Based RL Algorithms
 ### Deep Q-Learning
 A variant of Q-Learning is Deep Q-Learning. The idea of Deep Q-Learning is to use a deep neural network to approximate the optimal action-value function. This network outputs a vector of action values based directly on observations from the environment. The agent can choose the action with the maximum value, for example.
 
@@ -91,6 +102,9 @@ The idea of experience replay is to sample a small batch of random tuples to lea
 
 #### Fixed Q-Targets
 The Deep Q-Learning algorithm uses two separate networks with identical architectures. The primary network is updated in every step whereas the target network is updated only periodically, i.e. after a certain number of steps. This approach prevents from a a constantly moving target.
+
+## Policy-Based RL Algorithms
+An overview of policy-based algorithms can be found here: https://github.com/AnKra/udacity-deep-reinforcement-learning-continuous-control-project/blob/master/Report.md
 
 # Project 1 - Navigation
 
